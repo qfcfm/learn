@@ -62,6 +62,7 @@ public class WebSocketHandle {
         try {
             HttpSession http = (HttpSession) session.getUserProperties().get(Config.WEB_SOCKET);
             http.removeAttribute(Config.WEB_SOCKET);
+            session.close();
         } catch (Exception e) {
         }
     }
