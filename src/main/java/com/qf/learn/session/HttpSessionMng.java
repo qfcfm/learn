@@ -67,4 +67,20 @@ public class HttpSessionMng implements HttpSessionListener {
         session.removeAttribute(Config.USER_KEY);
         sessiontype(session, "userlogout");
     }
+
+    public static boolean UserIsLogin(HttpSession session) {
+        User tmp = (User) session.getAttribute(Config.USER_KEY);
+        if (tmp != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public static User CurUser(HttpSession session) {
+        User tmp = (User) session.getAttribute(Config.USER_KEY);
+        if (tmp != null) {
+            return tmp;
+        }
+        return null;
+    }
 }

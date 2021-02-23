@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/API")
-public class RestAPI {
+public class RestUser {
 
     @RequestMapping(value = "**")
     public String api() {
