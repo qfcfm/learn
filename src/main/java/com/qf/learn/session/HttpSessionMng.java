@@ -25,11 +25,11 @@ public class HttpSessionMng implements HttpSessionListener {
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        sessiontype(se.getSession(), "timeout");
+        NotifyWebSocket(se.getSession(), "timeout");
         System.out.println("销毁httpsession:" + se.getSession().getId());
     }
 
-    public static void sessiontype(HttpSession session, String type) {
+    public static void NotifyWebSocket(HttpSession session, String type) {
         Session websocket = (Session) session.getAttribute(Config.WEB_SOCKET);
         session.removeAttribute(Config.WEB_SOCKET);
         try {
@@ -47,7 +47,7 @@ public class HttpSessionMng implements HttpSessionListener {
         try {
             HttpSession oldsession = users.get(user.getUsername());
             if (oldsession != null) {
-                sessiontype(oldsession, "userloginsite");
+                NotifyWebSocket(oldsession, "userloginsite");
                 oldsession.removeAttribute(Config.USER_KEY);
             }
         } catch (Exception e) {
@@ -65,6 +65,22 @@ public class HttpSessionMng implements HttpSessionListener {
         }
         // 用户移除,并通知
         session.removeAttribute(Config.USER_KEY);
-        sessiontype(session, "userlogout");
+        NotifyWebSocket(session, "userlogout");
+    }
+
+    public static boolean UserIsLogin(HttpSession session) {
+        User tmp = (User) session.getAttribute(Config.USER_KEY);
+        if (tmp != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public static User CurUser(HttpSession session) {
+        User tmp = (User) session.getAttribute(Config.USER_KEY);
+        if (tmp != null) {
+            return tmp;
+        }
+        return null;
     }
 }

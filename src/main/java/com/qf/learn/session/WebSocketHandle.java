@@ -45,16 +45,10 @@ public class WebSocketHandle {
 
     private void BindHttpSession(Session session, HttpSession http) {
         try {
-            //解除旧的绑定信息
-            if ( http != null ) {
-                HttpSessionMng.sessiontype(http, "userloginsite");
-                http.setAttribute(Config.WEB_SOCKET, null);
-            }
             // 相互绑定数据
             http.setAttribute(Config.WEB_SOCKET, session);
             session.getUserProperties().put(Config.WEB_SOCKET, http);
         } catch (Exception e) {
-            // TODO: handle exception
         }
     }
 

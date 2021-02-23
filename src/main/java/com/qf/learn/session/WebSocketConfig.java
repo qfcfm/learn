@@ -29,7 +29,6 @@ public class WebSocketConfig extends ServerEndpointConfig.Configurator {
             //System.out.println(httpSession.getId());
             sec.getUserProperties().put(Config.WEB_SOCKET, httpSession);
         } catch (Exception e) {
-            // TODO: handle exception
         }
 
     }
